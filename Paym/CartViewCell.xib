@@ -48,13 +48,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIMENSIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4w-GC-5nc">
-                        <rect key="frame" x="124" y="75" width="243" height="14.5"/>
+                        <rect key="frame" x="124" y="71" width="243" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WEIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JG5-La-QDk">
-                        <rect key="frame" x="124" y="93.5" width="243" height="15"/>
+                        <rect key="frame" x="124" y="89.5" width="243" height="15"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                     <constraint firstItem="avt-W9-FhH" firstAttribute="trailing" secondItem="4M0-Ie-P1A" secondAttribute="trailingMargin" id="ACB-dX-PtW"/>
                     <constraint firstItem="iyu-Eh-3bV" firstAttribute="top" secondItem="4M0-Ie-P1A" secondAttribute="topMargin" id="Ax7-bg-jKF"/>
                     <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="JG5-La-QDk" secondAttribute="bottom" constant="8" id="Ifa-1U-51u"/>
-                    <constraint firstItem="B4w-GC-5nc" firstAttribute="top" secondItem="avt-W9-FhH" secondAttribute="bottom" constant="8" id="MEG-Fc-OYu"/>
+                    <constraint firstItem="B4w-GC-5nc" firstAttribute="top" secondItem="avt-W9-FhH" secondAttribute="bottom" constant="4" id="MEG-Fc-OYu"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sby-sB-KfL" secondAttribute="bottom" priority="999" constant="8" id="T06-8G-nNy"/>
                     <constraint firstItem="JG5-La-QDk" firstAttribute="leading" secondItem="sby-sB-KfL" secondAttribute="trailing" constant="8" id="VDz-66-ahy"/>
                     <constraint firstItem="Ndf-9g-9V5" firstAttribute="leading" secondItem="sby-sB-KfL" secondAttribute="trailing" constant="8" id="Wwy-E6-hLz"/>
