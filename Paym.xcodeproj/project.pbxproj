@@ -7,30 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1204133F1F14866C0049B1CA /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204133E1F14866C0049B1CA /* SummaryView.swift */; };
+		120413401F14AA0F0049B1CA /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1204133E1F14866C0049B1CA /* SummaryView.swift */; };
 		1247B63D1F124F00006B2122 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B63C1F124F00006B2122 /* AppDelegate.swift */; };
 		1247B63F1F124F00006B2122 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B63E1F124F00006B2122 /* ViewController.swift */; };
 		1247B6421F124F00006B2122 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6401F124F00006B2122 /* Main.storyboard */; };
 		1247B6441F124F00006B2122 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6431F124F00006B2122 /* Assets.xcassets */; };
 		1247B6471F124F00006B2122 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6451F124F00006B2122 /* LaunchScreen.storyboard */; };
-		1247B64F1F125647006B2122 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B64E1F125647006B2122 /* PaymentViewController.swift */; };
-		1247B6511F137BBE006B2122 /* PaymentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6501F137BBE006B2122 /* PaymentViewCell.swift */; };
 		1247B6531F137FCB006B2122 /* Paymentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6521F137FCB006B2122 /* Paymentable.swift */; };
 		1247B6551F138199006B2122 /* CartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6541F138199006B2122 /* CartViewCell.xib */; };
 		1247B6571F1385A9006B2122 /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6561F1385A9006B2122 /* CartViewCell.swift */; };
 		1247B6581F138654006B2122 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C60DD21F124D290017F819 /* CartViewController.swift */; };
 		1247B6591F138654006B2122 /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6561F1385A9006B2122 /* CartViewCell.swift */; };
 		1247B65A1F138654006B2122 /* CartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6541F138199006B2122 /* CartViewCell.xib */; };
-		1247B65B1F138654006B2122 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B64E1F125647006B2122 /* PaymentViewController.swift */; };
-		1247B65C1F138654006B2122 /* PaymentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6501F137BBE006B2122 /* PaymentViewCell.swift */; };
 		1247B65D1F138654006B2122 /* Paymentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6521F137FCB006B2122 /* Paymentable.swift */; };
-		1247B65F1F138E66006B2122 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B65E1F138E66006B2122 /* PaymentMethodView.swift */; };
-		1247B6611F138F37006B2122 /* PaymentMethodView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6601F138F37006B2122 /* PaymentMethodView.xib */; };
+		12B9ADB31F15B5D3007D8E0F /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12B9ADB21F15B5D3007D8E0F /* View.xib */; };
+		12B9ADB41F15B9B3007D8E0F /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B65E1F138E66006B2122 /* PaymentMethodView.swift */; };
+		12B9ADB51F15B9B4007D8E0F /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B65E1F138E66006B2122 /* PaymentMethodView.swift */; };
 		12C60DCC1F124CA90017F819 /* Paym.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C60DCA1F124CA90017F819 /* Paym.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		12C60DD31F124D290017F819 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C60DD21F124D290017F819 /* CartViewController.swift */; };
 		F4D94778181A8166CF2471C3 /* Pods_Paym.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D2E9EF5F03B8490FBA5AD6 /* Pods_Paym.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1204133E1F14866C0049B1CA /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		1247B63A1F124F00006B2122 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1247B63C1F124F00006B2122 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1247B63E1F124F00006B2122 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,13 +38,11 @@
 		1247B6431F124F00006B2122 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1247B6461F124F00006B2122 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1247B6481F124F00006B2122 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1247B64E1F125647006B2122 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		1247B6501F137BBE006B2122 /* PaymentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewCell.swift; sourceTree = "<group>"; };
 		1247B6521F137FCB006B2122 /* Paymentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paymentable.swift; sourceTree = "<group>"; };
 		1247B6541F138199006B2122 /* CartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartViewCell.xib; sourceTree = "<group>"; };
 		1247B6561F1385A9006B2122 /* CartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewCell.swift; sourceTree = "<group>"; };
 		1247B65E1F138E66006B2122 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
-		1247B6601F138F37006B2122 /* PaymentMethodView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodView.xib; sourceTree = "<group>"; };
+		12B9ADB21F15B5D3007D8E0F /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		12C60DC71F124CA90017F819 /* Paym.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Paym.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		12C60DCA1F124CA90017F819 /* Paym.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Paym.h; sourceTree = "<group>"; };
 		12C60DCB1F124CA90017F819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -122,11 +120,10 @@
 				12C60DD21F124D290017F819 /* CartViewController.swift */,
 				1247B6561F1385A9006B2122 /* CartViewCell.swift */,
 				1247B6541F138199006B2122 /* CartViewCell.xib */,
-				1247B64E1F125647006B2122 /* PaymentViewController.swift */,
-				1247B6501F137BBE006B2122 /* PaymentViewCell.swift */,
+				1204133E1F14866C0049B1CA /* SummaryView.swift */,
 				1247B65E1F138E66006B2122 /* PaymentMethodView.swift */,
-				1247B6601F138F37006B2122 /* PaymentMethodView.xib */,
 				1247B6521F137FCB006B2122 /* Paymentable.swift */,
+				12B9ADB21F15B5D3007D8E0F /* View.xib */,
 				12C60DCB1F124CA90017F819 /* Info.plist */,
 			);
 			path = Paym;
@@ -245,7 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1247B6611F138F37006B2122 /* PaymentMethodView.xib in Resources */,
+				12B9ADB31F15B5D3007D8E0F /* View.xib in Resources */,
 				1247B6551F138199006B2122 /* CartViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,11 +289,11 @@
 			files = (
 				1247B63F1F124F00006B2122 /* ViewController.swift in Sources */,
 				1247B6581F138654006B2122 /* CartViewController.swift in Sources */,
-				1247B65B1F138654006B2122 /* PaymentViewController.swift in Sources */,
 				1247B6591F138654006B2122 /* CartViewCell.swift in Sources */,
 				1247B65D1F138654006B2122 /* Paymentable.swift in Sources */,
+				120413401F14AA0F0049B1CA /* SummaryView.swift in Sources */,
+				12B9ADB51F15B9B4007D8E0F /* PaymentMethodView.swift in Sources */,
 				1247B63D1F124F00006B2122 /* AppDelegate.swift in Sources */,
-				1247B65C1F138654006B2122 /* PaymentViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,11 +301,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1247B6511F137BBE006B2122 /* PaymentViewCell.swift in Sources */,
-				1247B64F1F125647006B2122 /* PaymentViewController.swift in Sources */,
+				1204133F1F14866C0049B1CA /* SummaryView.swift in Sources */,
 				1247B6531F137FCB006B2122 /* Paymentable.swift in Sources */,
+				12B9ADB41F15B9B3007D8E0F /* PaymentMethodView.swift in Sources */,
 				1247B6571F1385A9006B2122 /* CartViewCell.swift in Sources */,
-				1247B65F1F138E66006B2122 /* PaymentMethodView.swift in Sources */,
 				12C60DD31F124D290017F819 /* CartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -527,6 +523,7 @@
 				1247B64A1F124F00006B2122 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		12C60DC11F124CA90017F819 /* Build configuration list for PBXProject "Paym" */ = {
 			isa = XCConfigurationList;

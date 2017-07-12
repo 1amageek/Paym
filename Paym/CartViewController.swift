@@ -18,23 +18,31 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
 
-    let paymentViewController: PaymentViewController = PaymentViewController()
+    private(set) lazy var summaryView: SummaryView = {
+        let view: SummaryView = SummaryView()
+        return view
+    }()
+
+    private(set) lazy var paymentMethodView: PaymentMethodView = {
+        let view: PaymentMethodView = PaymentMethodView()
+        return view
+    }()
 
     override func loadView() {
         super.loadView()
         self.view.addSubview(tableView)
-        self.addChildViewController(self.paymentViewController)
-        self.view.addSubview(self.paymentViewController.view)
-        self.paymentViewController.didMove(toParentViewController: self)
+        self.view.addSubview(summaryView)
+        self.view.addSubview(paymentMethodView)
     }
 
-    func layoutPaymentView() {
-        let contentSize: CGSize = self.paymentViewController.sizeToFit()
-        self.paymentViewController.view.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height, width: contentSize.width, height: contentSize.height)
+    func layoutSummaryView() {
+        summaryView.sizeToFit()
+        let contentSize: CGSize = summaryView.bounds.size
+        summaryView.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height - self.paymentMethodView.height, width: contentSize.width, height: contentSize.height)
     }
 
     override func viewWillLayoutSubviews() {
-        self.layoutPaymentView()
+        self.layoutSummaryView()
     }
     
     // MARK: -
@@ -49,7 +57,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: CartViewCell = tableView.dequeueReusableCell(withIdentifier: "CartViewCell", for: indexPath) as! CartViewCell
-
         return cell
     }
 
