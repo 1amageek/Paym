@@ -43,6 +43,7 @@ class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .clear
         view.rowHeight = 20
         view.contentInset = self.contentInset
+        view.decelerationRate = 0.2
         view.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         return view
     }()
@@ -91,6 +92,10 @@ class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
         case .detail: return DetailItem.values.count
         case .total: return 1
         }
+    }
+
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
