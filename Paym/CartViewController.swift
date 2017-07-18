@@ -25,6 +25,16 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     private(set) lazy var paymentMethodView: PaymentMethodView = {
         let view: PaymentMethodView = PaymentMethodView()
+        view.applePayBlock = {
+
+        }
+        view.otherPaymentBlock = {
+            let viewController: OrderViewController = OrderViewController()
+            let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
+            self.addChildViewController(navigationController)
+            self.view.addSubview(navigationController.view)
+            navigationController.didMove(toParentViewController: self)
+        }
         return view
     }()
 

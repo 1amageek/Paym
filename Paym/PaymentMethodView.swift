@@ -16,6 +16,10 @@ class PaymentMethodView: UIView {
         }
     }
 
+    var otherPaymentBlock: (() -> Void)?
+
+    var applePayBlock: (() -> Void)?
+
     let contentInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
 
     private(set) lazy var stackView: UIStackView = {
@@ -36,11 +40,11 @@ class PaymentMethodView: UIView {
         button.backgroundColor = .white
         button.layer.borderColor = button.tintColor.cgColor
         button.layer.borderWidth = 0.5
+        button.addTarget(self, action: #selector(didSelectButton(_:)), for: .touchUpInside)
         return button
     }()
 
     let applePayButton: UIButton = {
-        let title: String = "Pay"
         let button: UIButton = UIButton(type: .plain)
         button.setTitle("Pay", for: .normal)
         button.backgroundColor = .black
@@ -48,6 +52,7 @@ class PaymentMethodView: UIView {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.systemFont(ofSize: 28)
+        button.addTarget(self, action: #selector(didSelectButton(_:)), for: .touchUpInside)
         return button
     }()
 
@@ -99,6 +104,14 @@ class PaymentMethodView: UIView {
         self.bottomConstraint = self.bottomAnchor.constraint(equalTo: self.superview!.bottomAnchor, constant: 0)
         self.bottomConstraint?.isActive = true
         super.updateConstraints()
+    }
+
+    @objc func didSelectButton(_ button: UIButton) {
+        if button == self.applePayButton {
+            self.applePayBlock?()
+        } else {
+            self.otherPaymentBlock?()
+        }
     }
 
 }
