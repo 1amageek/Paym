@@ -9,6 +9,10 @@
 import UIKit
 import Stripe
 
+protocol PaymentDelegate: class {
+    func payment(_ payment: PaymentViewController, card: Card)
+}
+
 class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewDelegate {
 
     enum InputMode {
@@ -24,6 +28,8 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
             }
         }
     }
+
+    weak var delegate: PaymentDelegate?
 
     @objc private func changeInputMode() {
         switch self.inputMode {
@@ -59,8 +65,11 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
 
     private(set) lazy var cardView: CardView = {
         let view: CardView = CardView()
-        view.completion = { cardParams in
-
+        view.completion = { [weak self] card in
+            guard let strongSelf: PaymentViewController = self else {
+                return
+            }
+            strongSelf.completed(card: card)
         }
         return view
     }()
@@ -105,7 +114,7 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
     }
 
     func setupManualInput() {
-        self.view.addSubview(blurView)
+        self.view.addSubview(self.blurView)
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.cardView)
         self.cardView.transform = CGAffineTransform(translationX: 0, y: -self.cardView.bounds.height)
@@ -138,10 +147,22 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
         self.inputMode = .camera
     }
 
+    func completed(card: Card) {
+        self.delegate?.payment(self, card: card)
+        self.navigationController?.popViewController(animated: true)
+    }
+
     // MARK: -
 
     func cardIOView(_ cardIOView: CardIOView!, didScanCard cardInfo: CardIOCreditCardInfo!) {
-        print(cardInfo)
+        guard self.inputMode == .camera else {
+            return
+        }
+        let card: Card = Card(number: cardInfo.cardNumber,
+                              expirationMonth: String(cardInfo.expiryMonth),
+                              expirationYear: String(cardInfo.expiryYear),
+                              cvc: cardInfo.cvv)
+        self.completed(card: card)
     }
 
 }

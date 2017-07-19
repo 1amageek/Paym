@@ -15,6 +15,13 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
 
     let contentInset: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
+    private(set) lazy var titleLabel: UILabel = {
+        let label: UILabel = UILabel(frame: .zero)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.text = "カード番号を入力してください"
+        return label
+    }()
+
     private(set) lazy var paymentTextField: STPPaymentCardTextField = {
         let textField: STPPaymentCardTextField = STPPaymentCardTextField()
         textField.delegate = self
@@ -23,7 +30,7 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
 
     private(set) lazy var completeButton: UIButton = {
         let button: UIButton = UIButton(type: UIButtonType.plain)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitle("完了", for: .normal)
         button.addTarget(self, action: #selector(completed), for: .touchUpInside)
         button.isEnabled = false
@@ -43,8 +50,9 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(contentView)
+        self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(paymentTextField)
-        self.addSubview(completeButton)
+        self.contentView.addSubview(completeButton)
     }
 
     convenience init() {
@@ -59,8 +67,10 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         let padding: CGFloat = 8
+        self.titleLabel.sizeToFit()
+        self.titleLabel.center = CGPoint(x: self.contentView.bounds.width / 2, y: 44)
         self.paymentTextField.frame = CGRect(x: padding, y: self.contentView.bounds.height / 2 - 22, width: self.contentView.bounds.width - padding * 2, height: 44)
-        self.completeButton.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height - 44)
+        self.completeButton.center = CGPoint(x: self.contentView.bounds.width / 2, y: self.contentView.bounds.height - 44)
     }
 
     @objc func completed() {

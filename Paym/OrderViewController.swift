@@ -47,8 +47,6 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController: PaymentViewController = PaymentViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
-//        let viewController: CardIOPaymentViewController = CardIOPaymentViewController(paymentDelegate: self, scanningEnabled: true)
-//        self.present(viewController, animated: true, completion: nil)
     }
 
     func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
