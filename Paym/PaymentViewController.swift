@@ -106,13 +106,16 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
 
     func setupManualInput() {
         self.view.addSubview(blurView)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.cardView)
+        self.cardView.transform = CGAffineTransform(translationX: 0, y: -self.cardView.bounds.height)
         let blurAnimatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
             self.blurView.effect = UIBlurEffect(style: .dark)
+            self.cardView.transform = CGAffineTransform(translationX: 0, y: 16)
         }
         blurAnimatinor.addCompletion { _ in
-            self.view.addSubview(self.scrollView)
-            self.scrollView.addSubview(self.cardView)
             self.view.setNeedsLayout()
+            self.cardView.paymentTextField.becomeFirstResponder()
         }
         blurAnimatinor.startAnimation()
     }
@@ -120,11 +123,13 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
     func setupCameraInput() {
         let blurAnimatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
             self.blurView.effect = nil
+            self.cardView.alpha = 0
         }
         blurAnimatinor.addCompletion { _ in
             self.scrollView.removeFromSuperview()
             self.blurView.removeFromSuperview()
             self.cardView.removeFromSuperview()
+            self.cardView.alpha = 1
         }
         blurAnimatinor.startAnimation()
     }

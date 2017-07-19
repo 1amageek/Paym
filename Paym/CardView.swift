@@ -31,19 +31,25 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
         return button
     }()
 
+    private(set) lazy var contentView: UIView = {
+        let width: CGFloat = UIScreen.main.bounds.width - self.contentInset.left - self.contentInset.right
+        let height: CGFloat = width / 1.618
+        let view: UIView = UIView(frame: CGRect(x: self.contentInset.left, y: 0, width: width, height: height))
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 12
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(paymentTextField)
+        self.addSubview(contentView)
+        self.contentView.addSubview(paymentTextField)
         self.addSubview(completeButton)
-        self.layer.cornerRadius = 12
-        self.backgroundColor = .white
     }
 
     convenience init() {
         self.init(frame: .zero)
-        let width: CGFloat = UIScreen.main.bounds.width - self.contentInset.left - self.contentInset.right
-        let height: CGFloat = width / 1.618
-        self.frame = CGRect(x: self.contentInset.left, y: 0, width: width, height: height)
+        self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.contentView.bounds.height + self.contentInset.top + self.contentInset.bottom)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -52,8 +58,8 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let padding: CGFloat = 15
-        self.paymentTextField.frame = CGRect(x: padding, y: self.bounds.height / 2 - 22, width: self.bounds.width - padding * 2, height: 44)
+        let padding: CGFloat = 8
+        self.paymentTextField.frame = CGRect(x: padding, y: self.contentView.bounds.height / 2 - 22, width: self.contentView.bounds.width - padding * 2, height: 44)
         self.completeButton.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height - 44)
     }
 
