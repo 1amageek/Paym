@@ -83,12 +83,12 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
         return button
     }()
 
-    private(set) lazy var cameraInputButton: UIButton = {
+    private(set) lazy var cancelButton: UIButton = {
         let button: UIButton = UIButton(type: .plain)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.setTitle("カード番号をカメラで入力する", for: .normal)
+        button.setTitle("キャンセル", for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(changeInputMode), for: .touchUpInside)
+        button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         return button
     }()
 
@@ -96,6 +96,7 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
         super.loadView()
         self.view.backgroundColor = .black
         self.view.addSubview(cardIOView)
+        self.view.addSubview(cancelButton)
         self.view.addSubview(manualInputButton)
     }
 
@@ -110,7 +111,8 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
     }
 
     override func viewDidLayoutSubviews() {
-        self.manualInputButton.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height - 40)
+        self.manualInputButton.frame = CGRect(x: self.view.bounds.width - 12 - self.manualInputButton.bounds.width, y: self.view.bounds.height - 40, width: self.manualInputButton.bounds.width, height: self.manualInputButton.bounds.height)
+        self.cancelButton.frame = CGRect(x: 12, y: self.view.bounds.height - 40, width: self.cancelButton.bounds.width, height: self.cancelButton.bounds.height)
     }
 
     func setupManualInput() {
@@ -149,7 +151,11 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
 
     func completed(card: Card) {
         self.delegate?.payment(self, card: card)
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func cancel() {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: -
