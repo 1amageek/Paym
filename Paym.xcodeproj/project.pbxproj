@@ -34,6 +34,8 @@
 		12B9ADB51F15B9B4007D8E0F /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B65E1F138E66006B2122 /* PaymentMethodView.swift */; };
 		12C60DCC1F124CA90017F819 /* Paym.h in Headers */ = {isa = PBXBuildFile; fileRef = 12C60DCA1F124CA90017F819 /* Paym.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		12C60DD31F124D290017F819 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C60DD21F124D290017F819 /* CartViewController.swift */; };
+		12E9FC1D1F1F2C470065EDAE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC1C1F1F2C470065EDAE /* Card.swift */; };
+		12E9FC1E1F1F2C470065EDAE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC1C1F1F2C470065EDAE /* Card.swift */; };
 		AFD187AF7963B4DE575A000E /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE30A71239326F8E42315BA9 /* Pods_Sample.framework */; };
 		F4D94778181A8166CF2471C3 /* Pods_Paym.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D2E9EF5F03B8490FBA5AD6 /* Pods_Paym.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,7 @@
 		12C60DCA1F124CA90017F819 /* Paym.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Paym.h; sourceTree = "<group>"; };
 		12C60DCB1F124CA90017F819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12C60DD21F124D290017F819 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		12E9FC1C1F1F2C470065EDAE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		4B061E2E595EE947729072FD /* Pods-Paym.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paym.release.xcconfig"; path = "Pods/Target Support Files/Pods-Paym/Pods-Paym.release.xcconfig"; sourceTree = "<group>"; };
 		57CD45629A02D3AD9CE299AD /* Pods-Paym.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paym.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Paym/Pods-Paym.debug.xcconfig"; sourceTree = "<group>"; };
 		62F9C9D45F6CB1388CFDAF69 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 				128D0C421F18C99700FD284F /* OrderNavigationController.swift */,
 				128D0C3F1F18C10100FD284F /* OrderViewController.swift */,
 				128D0C261F18A3D200FD284F /* PaymentViewController.swift */,
+				12E9FC1C1F1F2C470065EDAE /* Card.swift */,
 				12624C811F1EFD2400AFE724 /* CardView.swift */,
 				1247B6521F137FCB006B2122 /* Paymentable.swift */,
 				12B9ADB21F15B5D3007D8E0F /* View.xib */,
@@ -369,6 +373,7 @@
 				1247B65D1F138654006B2122 /* Paymentable.swift in Sources */,
 				120413401F14AA0F0049B1CA /* SummaryView.swift in Sources */,
 				12B9ADB51F15B9B4007D8E0F /* PaymentMethodView.swift in Sources */,
+				12E9FC1E1F1F2C470065EDAE /* Card.swift in Sources */,
 				1247B63D1F124F00006B2122 /* AppDelegate.swift in Sources */,
 				128D0C441F18C99700FD284F /* OrderNavigationController.swift in Sources */,
 				12624C831F1F003B00AFE724 /* CardView.swift in Sources */,
@@ -387,6 +392,7 @@
 				1247B6531F137FCB006B2122 /* Paymentable.swift in Sources */,
 				128D0C401F18C10100FD284F /* OrderViewController.swift in Sources */,
 				12B9ADB41F15B9B3007D8E0F /* PaymentMethodView.swift in Sources */,
+				12E9FC1D1F1F2C470065EDAE /* Card.swift in Sources */,
 				1247B6571F1385A9006B2122 /* CartViewCell.swift in Sources */,
 				12C60DD31F124D290017F819 /* CartViewController.swift in Sources */,
 			);

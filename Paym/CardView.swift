@@ -11,7 +11,7 @@ import Stripe
 
 class CardView: UIView, STPPaymentCardTextFieldDelegate {
 
-    var completion: ((STPCardParams) -> Void)?
+    var completion: ((Card) -> Void)?
 
     let contentInset: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
@@ -64,7 +64,11 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
     }
 
     @objc func completed() {
-        self.completion?(self.paymentTextField.cardParams)
+        let card: Card = Card(number: self.paymentTextField.cardNumber!,
+                              expirationMonth: self.paymentTextField.formattedExpirationMonth!,
+                              expirationYear: self.paymentTextField.formattedExpirationYear!,
+                              cvc: self.paymentTextField.cvc!)
+        self.completion?(card)
     }
 
     // MARK: -
