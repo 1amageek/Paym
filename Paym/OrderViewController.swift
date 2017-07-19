@@ -8,24 +8,38 @@
 
 import UIKit
 
-class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CardIOPaymentViewControllerDelegate {
+class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var cancelBlock: (() -> Void)?
 
     private(set) lazy var tableView: UITableView = {
         let view: UITableView = UITableView(frame: self.view.bounds, style: .plain)
         view.dataSource = self
         view.delegate = self
+        view.backgroundView = self.backgroundView
         view.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        return view
+    }()
+
+    private(set) lazy var backgroundView: UIVisualEffectView = {
+        let view: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        view.frame = self.view.frame
         return view
     }()
 
     override func loadView() {
         super.loadView()
+        self.view.backgroundColor = .clear
         self.view.addSubview(tableView)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
     }
 
-    @objc func cancel() {
+    override func viewDidLayoutSubviews() {
+        self.backgroundView.frame = self.view.bounds
+    }
 
+    @objc func cancel() {
+        self.cancelBlock?()
     }
 
     // MARK: -
@@ -41,6 +55,9 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
         cell.textLabel?.text = "aaa"
+        cell.backgroundView = nil
+        cell.backgroundColor = .clear
+        cell.contentView.backgroundColor = .clear
         return cell
     }
 
@@ -49,11 +66,4 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 
-    func userDidProvide(_ cardInfo: CardIOCreditCardInfo!, in paymentViewController: CardIOPaymentViewController!) {
-
-    }
-
-    func userDidCancel(_ paymentViewController: CardIOPaymentViewController!) {
-
-    }
 }

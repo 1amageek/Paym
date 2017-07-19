@@ -33,6 +33,13 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
             self.addChildViewController(navigationController)
             self.view.addSubview(navigationController.view)
+
+            viewController.cancelBlock = { [weak self] in
+                guard let strongSelf = self else { return }
+                navigationController.willMove(toParentViewController: self)
+                navigationController.view.removeFromSuperview()
+                navigationController.removeFromParentViewController()
+            }
 //            navigationController.didMove(toParentViewController: self)
 //            let animatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
 //
