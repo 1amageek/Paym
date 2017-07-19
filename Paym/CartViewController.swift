@@ -33,7 +33,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
             let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
             self.addChildViewController(navigationController)
             self.view.addSubview(navigationController.view)
-
+            let frame: CGRect = navigationController.view.frame
+            let contentSize: CGSize = viewController.calculateSize()
+            navigationController.view.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height, width: contentSize.width, height: contentSize.height)
             viewController.cancelBlock = { [weak self] in
                 guard let strongSelf = self else { return }
                 navigationController.willMove(toParentViewController: self)

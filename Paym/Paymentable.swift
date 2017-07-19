@@ -30,7 +30,7 @@ protocol Paymentable {
 
     var tax: Float { get }
 
-    var price: Int { get }
+    var price: Float { get }
 
     var url: URL? { get }
 
