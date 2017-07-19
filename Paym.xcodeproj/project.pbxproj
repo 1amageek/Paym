@@ -21,6 +21,8 @@
 		1247B6591F138654006B2122 /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6561F1385A9006B2122 /* CartViewCell.swift */; };
 		1247B65A1F138654006B2122 /* CartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1247B6541F138199006B2122 /* CartViewCell.xib */; };
 		1247B65D1F138654006B2122 /* Paymentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247B6521F137FCB006B2122 /* Paymentable.swift */; };
+		12624C821F1EFD2400AFE724 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12624C811F1EFD2400AFE724 /* CardView.swift */; };
+		12624C831F1F003B00AFE724 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12624C811F1EFD2400AFE724 /* CardView.swift */; };
 		128D0C271F18A3D200FD284F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128D0C261F18A3D200FD284F /* PaymentViewController.swift */; };
 		128D0C281F18A3D200FD284F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128D0C261F18A3D200FD284F /* PaymentViewController.swift */; };
 		128D0C401F18C10100FD284F /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128D0C3F1F18C10100FD284F /* OrderViewController.swift */; };
@@ -49,6 +51,7 @@
 		1247B6541F138199006B2122 /* CartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartViewCell.xib; sourceTree = "<group>"; };
 		1247B6561F1385A9006B2122 /* CartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewCell.swift; sourceTree = "<group>"; };
 		1247B65E1F138E66006B2122 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
+		12624C811F1EFD2400AFE724 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		128D0C261F18A3D200FD284F /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		128D0C341F18B85000FD284F /* Sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sample-Bridging-Header.h"; sourceTree = "<group>"; };
 		128D0C3F1F18C10100FD284F /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +145,7 @@
 				128D0C421F18C99700FD284F /* OrderNavigationController.swift */,
 				128D0C3F1F18C10100FD284F /* OrderViewController.swift */,
 				128D0C261F18A3D200FD284F /* PaymentViewController.swift */,
+				12624C811F1EFD2400AFE724 /* CardView.swift */,
 				1247B6521F137FCB006B2122 /* Paymentable.swift */,
 				12B9ADB21F15B5D3007D8E0F /* View.xib */,
 				12C60DCB1F124CA90017F819 /* Info.plist */,
@@ -367,6 +371,7 @@
 				12B9ADB51F15B9B4007D8E0F /* PaymentMethodView.swift in Sources */,
 				1247B63D1F124F00006B2122 /* AppDelegate.swift in Sources */,
 				128D0C441F18C99700FD284F /* OrderNavigationController.swift in Sources */,
+				12624C831F1F003B00AFE724 /* CardView.swift in Sources */,
 				128D0C411F18C10100FD284F /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1204133F1F14866C0049B1CA /* SummaryView.swift in Sources */,
+				12624C821F1EFD2400AFE724 /* CardView.swift in Sources */,
 				128D0C271F18A3D200FD284F /* PaymentViewController.swift in Sources */,
 				128D0C431F18C99700FD284F /* OrderNavigationController.swift in Sources */,
 				1247B6531F137FCB006B2122 /* Paymentable.swift in Sources */,

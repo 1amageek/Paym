@@ -9,31 +9,28 @@
 import UIKit
 import Stripe
 
-class PaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate, CardIOViewDelegate {
+class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewDelegate {
 
     enum InputMode {
         case camera
         case manual
+    }
 
-        func layout() {
-            switch self {
-            case .camera: return
-            case .manual: return
+    var inputMode: InputMode = .camera {
+        didSet {
+            switch inputMode {
+            case .camera: self.setupCameraInput()
+            case .manual: self.setupManualInput()
             }
         }
     }
 
-    private(set) lazy var paymentTextField: STPPaymentCardTextField = {
-        let textField: STPPaymentCardTextField = STPPaymentCardTextField()
-        textField.delegate = self
-        return textField
-    }()
-
-    private(set) lazy var blurView: UIVisualEffectView = {
-        let view: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
-        view.frame = self.view.bounds
-        return view
-    }()
+    @objc private func changeInputMode() {
+        switch self.inputMode {
+        case .camera: self.inputMode = .manual
+        case .manual: self.inputMode = .camera
+        }
+    }
 
     private(set) lazy var cardIOView: CardIOView = {
         let view: CardIOView = CardIOView(frame: self.view.bounds)
@@ -44,12 +41,36 @@ class PaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate, 
         return view
     }()
 
+    private(set) lazy var blurView: UIVisualEffectView = {
+        let view: UIVisualEffectView = UIVisualEffectView(effect: nil)
+        view.frame = self.view.bounds
+        return view
+    }()
+
+    private(set) lazy var scrollView: UIScrollView = {
+        let view: UIScrollView = UIScrollView(frame: self.view.bounds)
+        view.delegate = self
+        view.alwaysBounceVertical = true
+        view.alwaysBounceHorizontal = false
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGesture(_:)))
+        view.addGestureRecognizer(gestureRecognizer)
+        return view
+    }()
+
+    private(set) lazy var cardView: CardView = {
+        let view: CardView = CardView()
+        view.completion = { cardParams in
+
+        }
+        return view
+    }()
+
     private(set) lazy var manualInputButton: UIButton = {
         let button: UIButton = UIButton(type: .plain)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitle("カード番号を手入力する", for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(setupManualInput), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeInputMode), for: .touchUpInside)
         return button
     }()
 
@@ -58,7 +79,7 @@ class PaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate, 
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitle("カード番号をカメラで入力する", for: .normal)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(setupManualInput), for: .touchUpInside)
+        button.addTarget(self, action: #selector(changeInputMode), for: .touchUpInside)
         return button
     }()
 
@@ -72,22 +93,44 @@ class PaymentViewController: UIViewController, STPPaymentCardTextFieldDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         if !CardIOUtilities.canReadCardWithCamera() {
-            self.setupManualInput()
+            self.inputMode = .manual
         } else {
             // スキャンの遅延防止のためにCardIO SDKのリソースをあらかじめ読み込む
             CardIOUtilities.preloadCardIO()
         }
     }
 
-    @objc func setupManualInput() {
-        self.view.addSubview(blurView)
-        self.view.addSubview(paymentTextField)
-        let padding: CGFloat = 15
-        paymentTextField.frame = CGRect(x: padding, y: 100, width: self.view.bounds.width - padding * 2, height: 44)
-    }
-
     override func viewDidLayoutSubviews() {
         self.manualInputButton.center = CGPoint(x: self.view.bounds.width / 2, y: self.view.bounds.height - 40)
+    }
+
+    func setupManualInput() {
+        self.view.addSubview(blurView)
+        let blurAnimatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.blurView.effect = UIBlurEffect(style: .dark)
+        }
+        blurAnimatinor.addCompletion { _ in
+            self.view.addSubview(self.scrollView)
+            self.scrollView.addSubview(self.cardView)
+            self.view.setNeedsLayout()
+        }
+        blurAnimatinor.startAnimation()
+    }
+
+    func setupCameraInput() {
+        let blurAnimatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.blurView.effect = nil
+        }
+        blurAnimatinor.addCompletion { _ in
+            self.scrollView.removeFromSuperview()
+            self.blurView.removeFromSuperview()
+            self.cardView.removeFromSuperview()
+        }
+        blurAnimatinor.startAnimation()
+    }
+
+    @objc func tapGesture(_ recognizer: UITapGestureRecognizer) {
+        self.inputMode = .camera
     }
 
     // MARK: -
