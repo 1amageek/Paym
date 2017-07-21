@@ -23,6 +23,12 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
 
+    private(set) lazy var blurView: UIVisualEffectView = {
+        let view: UIVisualEffectView = UIVisualEffectView(effect: nil)
+        view.frame = self.view.bounds
+        return view
+    }()
+
     private(set) lazy var paymentMethodView: PaymentMethodView = {
         let view: PaymentMethodView = PaymentMethodView()
         view.applePayBlock = {
@@ -31,6 +37,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.otherPaymentBlock = {
             let viewController: OrderViewController = OrderViewController()
             let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
+            self.view.addSubview(self.blurView)
             self.addChildViewController(navigationController)
             self.view.addSubview(navigationController.view)
             let frame: CGRect = navigationController.view.frame
@@ -41,15 +48,16 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                 navigationController.willMove(toParentViewController: self)
                 navigationController.view.removeFromSuperview()
                 navigationController.removeFromParentViewController()
+                self?.blurView.removeFromSuperview()
             }
-//            navigationController.didMove(toParentViewController: self)
-//            let animatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
-//
-//            }
-//            animatinor.addCompletion { _ in
-//
-//            }
-//            animatinor.startAnimation()
+            navigationController.didMove(toParentViewController: self)
+            let animatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+                self.blurView.effect = UIBlurEffect(style: .dark)
+            }
+            animatinor.addCompletion { _ in
+
+            }
+            animatinor.startAnimation()
         }
         return view
     }()

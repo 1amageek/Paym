@@ -37,7 +37,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.dataSource = self
         view.delegate = self
         view.backgroundView = self.backgroundView
-        view.contentInset = UIEdgeInsetsMake(0, 0, 56, 0)
+        view.contentInset = UIEdgeInsetsMake(0, 0, 100, 0)
         view.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         return view
     }()
@@ -77,6 +77,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tableView.layoutIfNeeded()
         var contentSize: CGSize = self.tableView.contentSize
         contentSize.height += self.navigationController?.navigationBar.bounds.height ?? 0
+        contentSize.height += self.tableView.contentInset.top + self.tableView.contentInset.bottom
         contentSize.height += 56
         return contentSize
     }
@@ -102,9 +103,17 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController: PaymentViewController = PaymentViewController()
-        //self.navigationController?.pushViewController(viewController, animated: true)
-        self.present(viewController, animated: true, completion: nil)
+        switch Section(rawValue: indexPath.section)! {
+        case .card:
+            let viewController: PaymentViewController = PaymentViewController()
+            self.present(viewController, animated: true, completion: nil)
+        case .shipping:
+            let viewController: ShippingInformationsViewController = ShippingInformationsViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+        case .contact: return
+        case .payment: return
+        }
+
     }
 
 }

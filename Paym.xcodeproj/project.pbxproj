@@ -40,6 +40,12 @@
 		12E9FC211F1F757D0065EDAE /* Paym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC1F1F1F757D0065EDAE /* Paym.swift */; };
 		12E9FC231F1F79810065EDAE /* PaymentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC221F1F79810065EDAE /* PaymentButtonView.swift */; };
 		12E9FC241F1F79810065EDAE /* PaymentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC221F1F79810065EDAE /* PaymentButtonView.swift */; };
+		12E9FC291F20BE910065EDAE /* ShippingInformationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC281F20BE910065EDAE /* ShippingInformationsViewController.swift */; };
+		12E9FC2A1F20BE910065EDAE /* ShippingInformationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC281F20BE910065EDAE /* ShippingInformationsViewController.swift */; };
+		12E9FC2C1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC2B1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift */; };
+		12E9FC2D1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E9FC2B1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift */; };
+		12E9FC2F1F20BED20065EDAE /* ShippingInformationsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12E9FC2E1F20BED20065EDAE /* ShippingInformationsViewCell.xib */; };
+		12E9FC301F20BED20065EDAE /* ShippingInformationsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12E9FC2E1F20BED20065EDAE /* ShippingInformationsViewCell.xib */; };
 		AFD187AF7963B4DE575A000E /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE30A71239326F8E42315BA9 /* Pods_Sample.framework */; };
 		F4D94778181A8166CF2471C3 /* Pods_Paym.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7D2E9EF5F03B8490FBA5AD6 /* Pods_Paym.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +76,9 @@
 		12E9FC1C1F1F2C470065EDAE /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		12E9FC1F1F1F757D0065EDAE /* Paym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paym.swift; sourceTree = "<group>"; };
 		12E9FC221F1F79810065EDAE /* PaymentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButtonView.swift; sourceTree = "<group>"; };
+		12E9FC281F20BE910065EDAE /* ShippingInformationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingInformationsViewController.swift; sourceTree = "<group>"; };
+		12E9FC2B1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingInformationsViewCell.swift; sourceTree = "<group>"; };
+		12E9FC2E1F20BED20065EDAE /* ShippingInformationsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShippingInformationsViewCell.xib; sourceTree = "<group>"; };
 		4B061E2E595EE947729072FD /* Pods-Paym.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paym.release.xcconfig"; path = "Pods/Target Support Files/Pods-Paym/Pods-Paym.release.xcconfig"; sourceTree = "<group>"; };
 		57CD45629A02D3AD9CE299AD /* Pods-Paym.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paym.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Paym/Pods-Paym.debug.xcconfig"; sourceTree = "<group>"; };
 		62F9C9D45F6CB1388CFDAF69 /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +165,9 @@
 				128D0C421F18C99700FD284F /* OrderNavigationController.swift */,
 				128D0C3F1F18C10100FD284F /* OrderViewController.swift */,
 				128D0C261F18A3D200FD284F /* PaymentViewController.swift */,
+				12E9FC281F20BE910065EDAE /* ShippingInformationsViewController.swift */,
+				12E9FC2B1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift */,
+				12E9FC2E1F20BED20065EDAE /* ShippingInformationsViewCell.xib */,
 				12E9FC1C1F1F2C470065EDAE /* Card.swift */,
 				12624C811F1EFD2400AFE724 /* CardView.swift */,
 				1247B6521F137FCB006B2122 /* Paymentable.swift */,
@@ -275,6 +287,7 @@
 			files = (
 				1247B6471F124F00006B2122 /* LaunchScreen.storyboard in Resources */,
 				1247B6441F124F00006B2122 /* Assets.xcassets in Resources */,
+				12E9FC301F20BED20065EDAE /* ShippingInformationsViewCell.xib in Resources */,
 				1247B65A1F138654006B2122 /* CartViewCell.xib in Resources */,
 				1247B6421F124F00006B2122 /* Main.storyboard in Resources */,
 			);
@@ -286,6 +299,7 @@
 			files = (
 				12B9ADB31F15B5D3007D8E0F /* View.xib in Resources */,
 				1247B6551F138199006B2122 /* CartViewCell.xib in Resources */,
+				12E9FC2F1F20BED20065EDAE /* ShippingInformationsViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1247B63F1F124F00006B2122 /* ViewController.swift in Sources */,
+				12E9FC2A1F20BE910065EDAE /* ShippingInformationsViewController.swift in Sources */,
 				1247B6581F138654006B2122 /* CartViewController.swift in Sources */,
 				1247B6591F138654006B2122 /* CartViewCell.swift in Sources */,
 				128D0C281F18A3D200FD284F /* PaymentViewController.swift in Sources */,
@@ -388,6 +403,7 @@
 				12E9FC241F1F79810065EDAE /* PaymentButtonView.swift in Sources */,
 				12624C831F1F003B00AFE724 /* CardView.swift in Sources */,
 				128D0C411F18C10100FD284F /* OrderViewController.swift in Sources */,
+				12E9FC2D1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +416,8 @@
 				128D0C271F18A3D200FD284F /* PaymentViewController.swift in Sources */,
 				128D0C431F18C99700FD284F /* OrderNavigationController.swift in Sources */,
 				12E9FC201F1F757D0065EDAE /* Paym.swift in Sources */,
+				12E9FC2C1F20BEBA0065EDAE /* ShippingInformationsViewCell.swift in Sources */,
+				12E9FC291F20BE910065EDAE /* ShippingInformationsViewController.swift in Sources */,
 				1247B6531F137FCB006B2122 /* Paymentable.swift in Sources */,
 				128D0C401F18C10100FD284F /* OrderViewController.swift in Sources */,
 				12E9FC231F1F79810065EDAE /* PaymentButtonView.swift in Sources */,
