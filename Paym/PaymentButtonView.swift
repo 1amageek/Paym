@@ -30,7 +30,7 @@ class PaymentButtonView: UIView {
     }()
 
     let paymentButton: UIButton = {
-        let button: UIButton = UIButton(type: .plain)
+        let button: UIButton = UIButton(type: .system)
         button.setTitle("注文を確定する", for: .normal)
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center

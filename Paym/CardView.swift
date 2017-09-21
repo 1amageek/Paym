@@ -29,7 +29,7 @@ class CardView: UIView, STPPaymentCardTextFieldDelegate {
     }()
 
     private(set) lazy var completeButton: UIButton = {
-        let button: UIButton = UIButton(type: UIButtonType.plain)
+        let button: UIButton = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.setTitle("完了", for: .normal)
         button.addTarget(self, action: #selector(completed), for: .touchUpInside)

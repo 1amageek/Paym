@@ -23,11 +23,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
 
-    private(set) lazy var blurView: UIVisualEffectView = {
-        let view: UIVisualEffectView = UIVisualEffectView(effect: nil)
-        view.frame = self.view.bounds
-        return view
-    }()
+    private var window: UIWindow?
 
     private(set) lazy var paymentMethodView: PaymentMethodView = {
         let view: PaymentMethodView = PaymentMethodView()
@@ -35,38 +31,63 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         }
         view.otherPaymentBlock = {
+            self.tableView.isUserInteractionEnabled = false
             let viewController: OrderViewController = OrderViewController()
             let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
-            self.view.addSubview(self.blurView)
-            self.addChildViewController(navigationController)
-            self.view.addSubview(navigationController.view)
-            let frame: CGRect = navigationController.view.frame
             let contentSize: CGSize = viewController.calculateSize()
-            navigationController.view.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height, width: contentSize.width, height: contentSize.height)
+            let targetHeight: CGFloat = self.view.bounds.height - contentSize.height
+            self.window = UIWindow(frame: CGRect(x: 0, y: targetHeight, width: contentSize.width, height: contentSize.height))
+            self.window?.rootViewController = navigationController
+            navigationController.view.frame = self.window!.bounds
+            self.window?.makeKeyAndVisible()
+            // Cancel
             viewController.cancelBlock = { [weak self] in
-                guard let strongSelf = self else { return }
-                navigationController.willMove(toParentViewController: self)
-                navigationController.view.removeFromSuperview()
-                navigationController.removeFromParentViewController()
-                self?.blurView.removeFromSuperview()
+                guard let `self` = self else { return }
+                let animator: UIViewPropertyAnimator = self.hideOtherPaymentAnimator()
+                animator.addAnimations {
+                    self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
+                }
+                animator.addCompletion({ _ in
+                    self.window = nil
+                    self.tableView.isUserInteractionEnabled = true
+                    self.view.window?.makeKey()
+                })
+                animator.startAnimation()
             }
-            navigationController.didMove(toParentViewController: self)
-            let animatinor: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
-                self.blurView.effect = UIBlurEffect(style: .dark)
-            }
-            animatinor.addCompletion { _ in
 
+            // Animation
+            self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
+            let animator: UIViewPropertyAnimator = self.showOtherPaymentAnimator()
+            animator.addAnimations {
+                self.window?.transform = .identity
             }
-            animatinor.startAnimation()
+            animator.startAnimation()
         }
         return view
     }()
+
+    func showOtherPaymentAnimator() -> UIViewPropertyAnimator {
+        let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.view.window?.transform = CGAffineTransform(scaleX: 0.93, y: 0.93)
+            self.view.window?.alpha = 0.8
+        }
+        return animator
+    }
+
+    func hideOtherPaymentAnimator() -> UIViewPropertyAnimator {
+        let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.view.window?.transform = .identity
+            self.view.window?.alpha = 1
+        }
+        return animator
+    }
 
     override func loadView() {
         super.loadView()
         self.view.addSubview(tableView)
         self.view.addSubview(summaryView)
         self.view.addSubview(paymentMethodView)
+        self.view.backgroundColor = .black
     }
 
     func layoutSummaryView() {

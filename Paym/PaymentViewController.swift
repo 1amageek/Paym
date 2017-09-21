@@ -31,6 +31,8 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
 
     weak var delegate: PaymentDelegate?
 
+    var dismiss: (() -> Void)?
+
     @objc private func changeInputMode() {
         switch self.inputMode {
         case .camera: self.inputMode = .manual
@@ -75,7 +77,7 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
     }()
 
     private(set) lazy var manualInputButton: UIButton = {
-        let button: UIButton = UIButton(type: .plain)
+        let button: UIButton = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitle("カード番号を手入力する", for: .normal)
         button.sizeToFit()
@@ -84,7 +86,7 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
     }()
 
     private(set) lazy var cancelButton: UIButton = {
-        let button: UIButton = UIButton(type: .plain)
+        let button: UIButton = UIButton(type: .system)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.setTitle("キャンセル", for: .normal)
         button.sizeToFit()
@@ -151,11 +153,11 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
 
     func completed(card: Card) {
         self.delegate?.payment(self, card: card)
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss?()
     }
 
     @objc func cancel() {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss?()
     }
 
     // MARK: -

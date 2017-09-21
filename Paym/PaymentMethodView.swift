@@ -32,7 +32,7 @@ class PaymentMethodView: UIView {
     }()
 
     let otherPaymentButton: UIButton = {
-        let button: UIButton = UIButton(type: .plain)
+        let button: UIButton = UIButton(type: .system)
         button.setTitle("Buy with other \npayment options", for: .normal)
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
@@ -45,7 +45,7 @@ class PaymentMethodView: UIView {
     }()
 
     let applePayButton: UIButton = {
-        let button: UIButton = UIButton(type: .plain)
+        let button: UIButton = UIButton(type: .system)
         button.setTitle("Pay", for: .normal)
         button.backgroundColor = .black
         button.tintColor = .white

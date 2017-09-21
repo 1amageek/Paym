@@ -32,6 +32,8 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     var cancelBlock: (() -> Void)?
 
+    private var window: UIWindow?
+
     private(set) lazy var tableView: UITableView = {
         let view: UITableView = UITableView(frame: self.view.bounds, style: .plain)
         view.dataSource = self
@@ -105,15 +107,42 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section)! {
         case .card:
-            let viewController: PaymentViewController = PaymentViewController()
-            self.present(viewController, animated: true, completion: nil)
+            showPaymentViewController()
         case .shipping:
             let viewController: ShippingInformationsViewController = ShippingInformationsViewController()
             self.navigationController?.pushViewController(viewController, animated: true)
         case .contact: return
         case .payment: return
         }
-
     }
 
+    func showPaymentViewController() {
+        let viewController: PaymentViewController = PaymentViewController()
+        viewController.dismiss = { [weak self] in
+            self?.hidePaymentViewController()
+        }
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = viewController
+        self.window?.makeKeyAndVisible()
+        self.window?.transform = CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.height)
+        let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.view.window?.transform = CGAffineTransform(scaleX: 0.93, y: 0.93)
+            self.view.window?.alpha = 0.8
+            self.window?.transform = .identity
+        }
+        animator.startAnimation()
+    }
+
+    func hidePaymentViewController() {
+        let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
+            self.view.window?.transform = .identity
+            self.view.window?.alpha = 1
+            self.window?.transform = CGAffineTransform(translationX: 0, y: UIScreen.main.bounds.height)
+        }
+        animator.addCompletion { _ in
+            self.window = nil
+            self.view.window?.makeKey()
+        }
+        animator.startAnimation()
+    }
 }
