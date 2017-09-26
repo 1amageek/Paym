@@ -118,6 +118,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func showPaymentViewController() {
         let viewController: PaymentViewController = PaymentViewController()
+        viewController.delegate = self
         viewController.dismiss = { [weak self] in
             self?.hidePaymentViewController()
         }
@@ -144,5 +145,11 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.view.window?.makeKey()
         }
         animator.startAnimation()
+    }
+}
+
+extension OrderViewController: PaymentDelegate {
+    func payment(_ payment: PaymentViewController, card: Card) {
+        
     }
 }

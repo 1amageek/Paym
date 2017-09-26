@@ -1,20 +1,20 @@
 //
-//  Paymentable.swift
+//  PaymItemProtocol.swift
 //  Paym
 //
-//  Created by 1amageek on 2017/07/10.
+//  Created by 1amageek on 2017/09/21.
 //  Copyright © 2017年 Stamp Inc. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct Dimension {
+public struct Dimension {
     let width: CGFloat
     let height: CGFloat
     let depth: CGFloat
 }
 
-protocol Paymentable {
+public protocol ItemProtocol: Hashable {
 
     var id: String { get }
 
@@ -37,4 +37,25 @@ protocol Paymentable {
     var dimensions: Dimension? { get }
 
     var weight: CGFloat? { get }
+
+    var quantity: Int { get set }
+}
+
+extension ItemProtocol {
+    
+    var hashValue: Int {
+        return self.id.hash
+    }
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    mutating func add() {
+        self.quantity += 1
+    }
+
+    mutating func remove() {
+        self.quantity -= 1
+    }
 }
