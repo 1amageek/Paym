@@ -30,39 +30,39 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         view.applePayBlock = {
 
         }
-        view.otherPaymentBlock = {
-            self.tableView.isUserInteractionEnabled = false
-            let viewController: OrderViewController = OrderViewController()
-            let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
-            let contentSize: CGSize = viewController.calculateSize()
-            let targetHeight: CGFloat = self.view.bounds.height - contentSize.height
-            self.window = UIWindow(frame: CGRect(x: 0, y: targetHeight, width: contentSize.width, height: contentSize.height))
-            self.window?.rootViewController = navigationController
-            navigationController.view.frame = self.window!.bounds
-            self.window?.makeKeyAndVisible()
-            // Cancel
-            viewController.cancelBlock = { [weak self] in
-                guard let `self` = self else { return }
-                let animator: UIViewPropertyAnimator = self.hideOtherPaymentAnimator()
-                animator.addAnimations {
-                    self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
-                }
-                animator.addCompletion({ _ in
-                    self.window = nil
-                    self.tableView.isUserInteractionEnabled = true
-                    self.view.window?.makeKey()
-                })
-                animator.startAnimation()
-            }
-
-            // Animation
-            self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
-            let animator: UIViewPropertyAnimator = self.showOtherPaymentAnimator()
-            animator.addAnimations {
-                self.window?.transform = .identity
-            }
-            animator.startAnimation()
-        }
+//        view.otherPaymentBlock = {
+//            self.tableView.isUserInteractionEnabled = false
+//            let viewController: OrderViewController = OrderViewController()
+//            let navigationController: OrderNavigationController = OrderNavigationController(rootViewController: viewController)
+//            let contentSize: CGSize = viewController.calculateSize()
+//            let targetHeight: CGFloat = self.view.bounds.height - contentSize.height
+//            self.window = UIWindow(frame: CGRect(x: 0, y: targetHeight, width: contentSize.width, height: contentSize.height))
+//            self.window?.rootViewController = navigationController
+//            navigationController.view.frame = self.window!.bounds
+//            self.window?.makeKeyAndVisible()
+//            // Cancel
+//            viewController.cancelBlock = { [weak self] in
+//                guard let `self` = self else { return }
+//                let animator: UIViewPropertyAnimator = self.hideOtherPaymentAnimator()
+//                animator.addAnimations {
+//                    self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
+//                }
+//                animator.addCompletion({ _ in
+//                    self.window = nil
+//                    self.tableView.isUserInteractionEnabled = true
+//                    self.view.window?.makeKey()
+//                })
+//                animator.startAnimation()
+//            }
+//
+//            // Animation
+//            self.window?.transform = CGAffineTransform(translationX: 0, y: contentSize.height)
+//            let animator: UIViewPropertyAnimator = self.showOtherPaymentAnimator()
+//            animator.addAnimations {
+//                self.window?.transform = .identity
+//            }
+//            animator.startAnimation()
+//        }
         return view
     }()
 
@@ -93,7 +93,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func layoutSummaryView() {
         summaryView.sizeToFit()
         let contentSize: CGSize = summaryView.bounds.size
-        summaryView.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height - self.paymentMethodView.height, width: contentSize.width, height: contentSize.height)
+//        summaryView.frame = CGRect(x: 0, y: self.view.bounds.height - contentSize.height - self.paymentMethodView.height, width: contentSize.width, height: contentSize.height)
     }
 
     override func viewWillLayoutSubviews() {

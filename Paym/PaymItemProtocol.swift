@@ -14,7 +14,7 @@ public struct Dimension {
     let depth: CGFloat
 }
 
-public protocol ItemProtocol: Hashable {
+public protocol ItemProtocol {
 
     var id: String { get }
 
@@ -39,6 +39,23 @@ public protocol ItemProtocol: Hashable {
     var weight: CGFloat? { get }
 
     var quantity: Int { get set }
+}
+
+extension ItemProtocol {
+    
+    var image: URL? { return nil }
+
+    var name: String? { return nil }
+
+    var caption: String? { return nil }
+
+    var desc: String? { return nil }
+
+    var url: URL? { return nil }
+
+    var dimensions: Dimension? { return nil }
+
+    var weight: CGFloat? { return nil }
 }
 
 extension ItemProtocol {

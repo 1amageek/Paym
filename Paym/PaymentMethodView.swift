@@ -8,19 +8,13 @@
 
 import UIKit
 
-class PaymentMethodView: UIView {
+public class PaymentMethodView: UIView {
 
-    var height: CGFloat = 56 {
-        didSet {
-            self.setNeedsUpdateConstraints()
-        }
-    }
+    public var otherPaymentBlock: (() -> Void)?
 
-    var otherPaymentBlock: (() -> Void)?
+    public var applePayBlock: (() -> Void)?
 
-    var applePayBlock: (() -> Void)?
-
-    let contentInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
+    public let contentInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 12, bottom: 6, right: 12)
 
     private(set) lazy var stackView: UIStackView = {
         let view: UIStackView = UIStackView(frame: self.bounds)
@@ -31,87 +25,71 @@ class PaymentMethodView: UIView {
         return view
     }()
 
-    let otherPaymentButton: UIButton = {
+    public let otherPaymentButton: UIButton = {
         let button: UIButton = UIButton(type: .system)
         button.setTitle("Buy with other \npayment options", for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.backgroundColor = .white
         button.layer.borderColor = button.tintColor.cgColor
         button.layer.borderWidth = 0.5
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didSelectButton(_:)), for: .touchUpInside)
         return button
     }()
 
-    let applePayButton: UIButton = {
+    public let applePayButton: UIButton = {
         let button: UIButton = UIButton(type: .system)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         button.setTitle("Pay", for: .normal)
         button.backgroundColor = .black
         button.tintColor = .white
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = UIFont.systemFont(ofSize: 28)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(didSelectButton(_:)), for: .touchUpInside)
         return button
     }()
 
-    override init(frame: CGRect) {
+    public convenience init() {
+        self.init(frame: .zero)
+    }
+
+    public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(stackView)
+        _init()
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+
+    private func _init() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .white
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowRadius = 2
-        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowOpacity = 0.25
-        stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: contentInset.left).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -contentInset.right).isActive = true
-        stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: contentInset.top).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -contentInset.bottom).isActive = true
+        self.addSubview(stackView)
+        self.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 0).isActive = true
+        self.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 0).isActive = true
+        self.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 0).isActive = true
+        self.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 0).isActive = true
         stackView.addArrangedSubview(otherPaymentButton)
         stackView.addArrangedSubview(applePayButton)
     }
 
-    convenience init() {
-        self.init(frame: .zero)
+    public override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIViewNoIntrinsicMetric, height: 48)
     }
 
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private var heightConstraint: NSLayoutConstraint?
-
-    private var leadingConstraint: NSLayoutConstraint?
-
-    private var trailingConstraint: NSLayoutConstraint?
-
-    private var bottomConstraint: NSLayoutConstraint?
-
-    public override func updateConstraints() {
-        self.removeConstraints([self.heightConstraint,
-                                self.leadingConstraint,
-                                self.trailingConstraint,
-                                self.bottomConstraint
-            ].flatMap({ return $0 }))
-        self.heightConstraint = self.heightAnchor.constraint(greaterThanOrEqualToConstant: self.height)
-        self.heightConstraint?.isActive = true
-        self.leadingConstraint = self.leadingAnchor.constraint(equalTo: self.superview!.leadingAnchor)
-        self.trailingConstraint = self.trailingAnchor.constraint(equalTo: self.superview!.trailingAnchor)
-        self.leadingConstraint?.isActive = true
-        self.trailingConstraint?.isActive = true
-        self.bottomConstraint = self.bottomAnchor.constraint(equalTo: self.superview!.bottomAnchor, constant: 0)
-        self.bottomConstraint?.isActive = true
-        super.updateConstraints()
-    }
-
-    @objc func didSelectButton(_ button: UIButton) {
+    @objc public func didSelectButton(_ button: UIButton) {
         if button == self.applePayButton {
             self.applePayBlock?()
         } else {
             self.otherPaymentBlock?()
         }
     }
-
 }

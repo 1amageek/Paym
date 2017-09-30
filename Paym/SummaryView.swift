@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
+public class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
 
     enum Section: Int {
         case detail
@@ -33,7 +33,7 @@ class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    let contentInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
+    public let contentInset: UIEdgeInsets = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
 
     private(set) lazy var tableView: UITableView = {
         let view: UITableView = UITableView(frame: self.bounds, style: .plain)
@@ -41,70 +41,83 @@ class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
         view.delegate = self
         view.separatorColor = .clear
         view.backgroundColor = .clear
-        view.rowHeight = 20
         view.contentInset = self.contentInset
         view.decelerationRate = 0.2
+        view.isScrollEnabled = false
         view.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private(set) lazy var seperateView: UIView = {
-        let view: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: 0.5))
-        view.backgroundColor = UIColor.lightGray
-        return view
-    }()
+    convenience init() {
+        self.init(frame: .zero)
+        _init()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        _init()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _init()
+    }
+
+    private func _init() {
+        self.backgroundColor = .clear
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(tableView)
-        self.addSubview(seperateView)
-        self.backgroundColor = .white
+        self.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 0).isActive = true
+        self.bottomAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 0).isActive = true
+        self.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 0).isActive = true
+        self.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: 0).isActive = true
     }
 
-    convenience init() {
-        let frame: CGRect = UIScreen.main.bounds
-        self.init(frame: frame)
+    public override var intrinsicContentSize: CGSize {
+        var height: CGFloat = 0
+        (0..<self.tableView.numberOfSections).forEach { (section) in
+            let headerHeight: CGFloat = self.tableView.delegate?.tableView?(self.tableView, heightForHeaderInSection: section) ?? 0
+            let footerHeight: CGFloat = self.tableView.delegate?.tableView?(self.tableView, heightForFooterInSection: section) ?? 0
+            height += headerHeight
+            height += footerHeight
+            (0..<self.tableView.numberOfRows(inSection: section)).forEach({ (row) in
+                let rowHeight: CGFloat = self.tableView.delegate?.tableView?(self.tableView, heightForRowAt: IndexPath(row: row, section: section)) ?? 0
+                height += rowHeight
+            })
+        }
+        return CGSize(width: UIViewNoIntrinsicMetric, height: height)
     }
+
+    // MARK: -
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.tableView.frame = self.bounds
-    }
-
-    override func sizeToFit() {
-        self.tableView.setNeedsLayout()
-        self.tableView.layoutIfNeeded()
-        var contentSize: CGSize = self.tableView.contentSize
-        contentSize.height += self.contentInset.top + self.contentInset.bottom
-        self.bounds = CGRect(origin: .zero, size: contentSize)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return Section.values.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
         case .detail: return DetailItem.values.count
         case .total: return 1
         }
     }
 
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
+        cell.backgroundColor = .clear
         configure(cell: cell, at: indexPath)
         return cell
     }
 
-    func configure(cell: UITableViewCell, at indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 20
+    }
+
+    public func configure(cell: UITableViewCell, at indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section)! {
         case .detail:
             cell.textLabel?.font = UIFont.systemFont(ofSize: 13)
@@ -123,5 +136,4 @@ class SummaryView: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.detailTextLabel?.text = "sub"
         }
     }
-
 }

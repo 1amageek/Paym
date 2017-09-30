@@ -40,6 +40,10 @@ class PaymentViewController: UIViewController, CardIOViewDelegate, UIScrollViewD
         }
     }
 
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     private(set) lazy var cardIOView: CardIOView = {
         let view: CardIOView = CardIOView(frame: self.view.bounds)
         view.delegate = self

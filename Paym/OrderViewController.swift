@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+public class OrderViewController: UIViewController {
 
     enum Section: Int {
         case card
@@ -30,93 +30,40 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
-    var cancelBlock: (() -> Void)?
+    public var cancelBlock: (() -> Void)?
 
-    private var window: UIWindow?
-
-    private(set) lazy var tableView: UITableView = {
-        let view: UITableView = UITableView(frame: self.view.bounds, style: .plain)
-        view.dataSource = self
+    private(set) lazy var orderView: OrderView = {
+        let view: OrderView = OrderView()
         view.delegate = self
-        view.backgroundView = self.backgroundView
-        view.contentInset = UIEdgeInsetsMake(0, 0, 100, 0)
-        view.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        view.dataSource = self
         return view
     }()
-
-    private(set) lazy var backgroundView: UIVisualEffectView = {
-        let view: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
-        view.frame = self.view.frame
-        return view
-    }()
-
-    private(set) lazy var paymentButtonView: PaymentButtonView = {
-        let view: PaymentButtonView = PaymentButtonView()
-        view.paymentBlock = {
-
-        }
-        return view
-    }()
-
-    override func loadView() {
-        super.loadView()
-        self.view.backgroundColor = .clear
-        self.view.addSubview(tableView)
-        self.view.addSubview(paymentButtonView)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-    }
-
-    override func viewDidLayoutSubviews() {
-        self.backgroundView.frame = self.view.bounds
-    }
 
     @objc func cancel() {
         self.cancelBlock?()
     }
 
-    func calculateSize() -> CGSize {
-        self.tableView.setNeedsLayout()
-        self.tableView.layoutIfNeeded()
-        var contentSize: CGSize = self.tableView.contentSize
-        contentSize.height += self.navigationController?.navigationBar.bounds.height ?? 0
-        contentSize.height += self.tableView.contentInset.top + self.tableView.contentInset.bottom
-        contentSize.height += 56
-        return contentSize
-    }
-
     // MARK: -
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.values.count
+
+    private var window: UIWindow?
+
+    public override func loadView() {
+        super.loadView()
+        self.view = orderView
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    public override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+        guard let view: UIView = parent?.view else { return }
+        self.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        self.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        self.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        self.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: .value1, reuseIdentifier: "UITableViewCell")
-        let title: String = Section(rawValue: indexPath.section)!.text
-        cell.textLabel?.text = title
-        cell.backgroundView = nil
-        cell.backgroundColor = .clear
-        cell.contentView.backgroundColor = .clear
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch Section(rawValue: indexPath.section)! {
-        case .card:
-            showPaymentViewController()
-        case .shipping:
-            let viewController: ShippingInformationsViewController = ShippingInformationsViewController()
-            self.navigationController?.pushViewController(viewController, animated: true)
-        case .contact: return
-        case .payment: return
-        }
-    }
-
-    func showPaymentViewController() {
+    private func showPaymentViewController() {
         let viewController: PaymentViewController = PaymentViewController()
         viewController.delegate = self
         viewController.dismiss = { [weak self] in
@@ -134,7 +81,7 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
         animator.startAnimation()
     }
 
-    func hidePaymentViewController() {
+    private func hidePaymentViewController() {
         let animator: UIViewPropertyAnimator = UIViewPropertyAnimator(duration: 0.33, dampingRatio: 1) {
             self.view.window?.transform = .identity
             self.view.window?.alpha = 1
@@ -151,5 +98,40 @@ class OrderViewController: UIViewController, UITableViewDelegate, UITableViewDat
 extension OrderViewController: PaymentDelegate {
     func payment(_ payment: PaymentViewController, card: Card) {
         
+    }
+}
+
+extension OrderViewController: UITableViewDataSource {
+
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return Section.values.count
+    }
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: OrderViewCell = tableView.dequeueReusableCell(withIdentifier: "OrderViewCell", for: indexPath) as! OrderViewCell
+        let section: Section = Section(rawValue: indexPath.section)!
+        let title: String = section.text
+        cell.titleLabel.text = title
+        cell.detailLabel.text = "aweoifjapwoeifjawpoejfaopweijfpaowijefpaowiejfpaowiefjapwoeifjapwoiejfapoewifjapwoeifjapwoiefjpawoiefjapwoeijfpa"
+        cell.backgroundView = nil
+        cell.backgroundColor = .clear
+        cell.contentView.backgroundColor = .clear
+        return cell
+    }
+}
+
+extension OrderViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch Section(rawValue: indexPath.section)! {
+        case .card:
+            self.showPaymentViewController()
+        case .shipping: return
+        case .contact: return
+        case .payment: return
+        }
     }
 }

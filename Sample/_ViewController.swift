@@ -8,10 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class _ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let paymView: PaymView = PaymView(frame: .zero)
+        self.view.addSubview(paymView)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
